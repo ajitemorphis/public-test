@@ -1,0 +1,24 @@
+name: Approval Test
+on: 
+    push:
+      branches:
+        - main
+  
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: build
+          run: |
+            echo 'building'
+  
+    publish:
+      needs: [build]
+      runs-on: ubuntu-latest
+      environment: prod
+      timeout-minutes: 1
+      steps:
+        - name: publish
+          run: |
+           echo 'publishing'
+           echo ${{ env.CHECK_VAR }}
